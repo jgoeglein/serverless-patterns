@@ -1,5 +1,5 @@
 import { Sequelize, Options as SequelizeOptions, DataTypes } from 'sequelize';
-import { Signer } from 'aws-sdk-js-v3-rds-signer';
+import { Signer } from '@aws-sdk/lib-rds';
 
 const sequelizeConfig: SequelizeOptions = {
   host: process.env.PGHOST,
@@ -15,9 +15,9 @@ if (process.env.STAGE !== 'local') {
 }
 
 const signer = new Signer({
-  hostname: process.env.PGHOST,
+  hostname: process.env.PGHOST || "",
   port: 5432,
-  region: process.env.AWS_REGION,
+  region: process.env.AWS_REGION || "",
   username: 'syscdk'
 });
 
